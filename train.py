@@ -15,26 +15,18 @@ class trainer():
         self.net=featurenet(Block,planes=[64,128,256]).cuda()
         self.optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, self.net.parameters()),lr=0.0001)
         self.epochs=40
-        self.num_spix=1500
-        self.batch_size=2
+        self.num_spix=500
+        self.batch_size=4
         self.loss_util=LossFuncs.ComputeLoss()
         self.pca_util=postprocessing.PCA_util()
-        if not os.path.exists('./Results'): os.mkdir('./Results')
-        if not os.path.exists('./saved_model'): os.mkdir('./saved_model')
-    def update_numspix(self,epoch):
-        if epoch>10:
-            self.num_spix=1000
-            self.batch_size=4
-        if epoch>20:
-            self.num_spix=500
-            self.batch_size=8
         self.data_util=DataProviderUtil(num_spix=self.num_spix,batch_size=self.batch_size)
         self.pix_to_spix=pix_2_spix.pix_to_superpix(num_spix=self.num_spix)
-
+        if not os.path.exists('./Results'): os.mkdir('./Results')
+        if not os.path.exists('./saved_model'): os.mkdir('./saved_model')
+    
     def start_train(self):
         ep=self.load_saved_model()
         for epoch in range(ep,self.epochs):
-            self.update_numspix(epoch)
             running_loss=0
             for i,sample in enumerate(self.data_util.getData['train']):
                 t0=time.time()

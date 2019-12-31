@@ -65,5 +65,3 @@ class featurenet(nn.Module):
         out=self.fbn(self.fconv(conFx))
         return out
 
-
-
