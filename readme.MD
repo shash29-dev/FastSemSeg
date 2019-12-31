@@ -1,7 +1,7 @@
 
 ### Fast Semantic Feature Extraction using Superpixels for Soft Segmentation
 #### Introduction
-Pre-print of our paper can be found [here](https://drive.google.com/file/d/1XDNzcknvJs_xO96jLBLv6vbBOUP65KJ9/view?usp=sharing). In this work, We design an end-to-end trainable network and give a detailed comparison of two deep metric learning methods: pixel-based and superpixel-based. We show that huge computational overhead can be reduced by learning the metric based on superpixels. This also conserves the global semantic context of the image, which is lost in pixel-wise computation because of the sampling to reduce comparisons.
+Pre-print of our paper accepted in conference CVIP-2019 can be found [here](https://drive.google.com/file/d/1XDNzcknvJs_xO96jLBLv6vbBOUP65KJ9/view?usp=sharing). In this work, We design an end-to-end trainable network and give a detailed comparison of two deep metric learning methods: pixel-based and superpixel-based. We show that huge computational overhead can be reduced by learning the metric based on superpixels. This also conserves the global semantic context of the image, which is lost in pixel-wise computation because of the sampling to reduce comparisons.
    
 <p align="center">
     <img width=800 height=280 src="./Images/Arch.png">
