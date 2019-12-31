@@ -8,6 +8,7 @@ from model import featurenet,Block
 import time
 import numpy as np
 import postprocessing, LossFuncs,pix_2_spix
+import os 
 
 class trainer():
     def __init__(self):
@@ -18,7 +19,8 @@ class trainer():
         self.batch_size=2
         self.loss_util=LossFuncs.ComputeLoss()
         self.pca_util=postprocessing.PCA_util()
-
+        if not os.path.exists('./Results'): os.mkdir('./Results')
+        if not os.path.exists('./saved_model'): os.mkdir('./saved_model')
     def update_numspix(self,epoch):
         if epoch>10:
             self.num_spix=1000
