@@ -52,7 +52,7 @@ class trainer():
 
     def load_saved_model(self):
         try:
-            checkpoint = torch.load('./saved_model/LatestSavednet.pth')
+            checkpoint = torch.load('./saved_model/LatestSavednet_epoch_0.pth')
             self.net.load_state_dict(checkpoint['model_state_dict'])
             self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
             ep=checkpoint['epoch']+1

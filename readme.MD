@@ -34,7 +34,7 @@ Once data is downloaded in data folder, simply run ```train.py``` script to star
 ```
 gedit config.py     # Set Data Path correctly if unzipped elsewhere
 gedit train.py      # Set parameters in trainer().__init__(self) function
-### Strat Training ### 
+### Start Training ### 
 python train.py
 ```
 

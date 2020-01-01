@@ -66,9 +66,9 @@ class DataProviderUtil():
         self.getData={'train': DataLoader(DataProvider(transformList=self.transformList,data='train'), batch_size=batch_size, shuffle=True, num_workers=8,pin_memory=True),
                 'val': DataLoader(DataProvider(transformList=self.transformList,data='val'), batch_size= batch_size ,shuffle=True, num_workers=8,pin_memory=True)}
 
-if __name__=='__main__':            
-          
-    for i,sample in enumerate(getData['train']):
+if __name__=='__main__': 
+    inst=DataProviderUtil()           
+    for i,sample in enumerate(inst.getData['train']):
         a=sample['image'][0]
         b=sample['gt'][0] 
         segments=sample['segments'][0] 
