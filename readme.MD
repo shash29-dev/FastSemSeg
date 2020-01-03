@@ -38,6 +38,20 @@ gedit train.py      # Set parameters in trainer().__init__(self) function
 python train.py
 ```
 
+#### Demo
+Put any image in ```demo_im``` folder and simply run ```demo.py``` script with argument as image name. Result will appear in ```Results_demo``` folder. Note that ```saved_model``` has ```LatestSavednet.pth``` file in it for demo to run correctly. 
+
+```
+python demo.py tower.jpg
+```
+
+<p align="center">
+    <img width=400 src="./Images/r1.png"><br>
+    <img width=400  src="./Images/r2.png">
+
+    
+</p>
+
 #### Authors
 ```
 - Shashikant Verma (IIT Gandhinagar)
