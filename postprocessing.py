@@ -26,18 +26,18 @@ class PCA_util():
         feats[feats>5]=5
         fdim=feats.shape[-1]
 
-        # maxfd= fdim-fdim%3
-        # for i in range(0,maxfd,3):
-        #     feats[:, :, i : i + 3] = imguidedfilter(feats[:, :, i : i + 3], image, (10, 10), 0.001)
-        # for i in range(maxfd,fdim):
-        #     feats[:, :, i] = imguidedfilter(feats[:, :, i], image, (10, 10), 0.001)
+        maxfd= fdim-fdim%3
+        for i in range(0,maxfd,3):
+            feats[:, :, i : i + 3] = imguidedfilter(feats[:, :, i : i + 3], image, (10, 10), 0.001)
+        for i in range(maxfd,fdim):
+            feats[:, :, i] = imguidedfilter(feats[:, :, i], image, (10, 10), 0.001)
 
         simp=self.pca_feats(feats,pca_dim=3)
         simp_gui=np.zeros(simp.shape)
         for i in range(3):
-            simp_gui[:, :, i] = imguidedfilter(simp[:, :, i], image, (10, 10), 0.001)
-        for i in range(simp.shape[-1]):
-            simp_gui[:, :, i] = simp_gui[:, :, i] - simp_gui[:, :, i].min()
-            simp_gui[:, :, i] = simp_gui[:, :, i] / simp_gui[:, :, i].max()
+            simp_gui[:, :, i] = imguidedfilter(simp[:, :, i], image, (10, 10), 0.01)
+        # for i in range(simp.shape[-1]):
+        #     simp_gui[:, :, i] = simp_gui[:, :, i] - simp_gui[:, :, i].min()
+        #     simp_gui[:, :, i] = simp_gui[:, :, i] / simp_gui[:, :, i].max()
         return simp_gui,simp, feats
 

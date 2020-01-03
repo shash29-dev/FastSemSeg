@@ -29,6 +29,7 @@ class Block(nn.Module):
         self.nconv=conv1x1(in_planes,out_planes)
         self.nbn=nn.BatchNorm2d(out_planes)
 
+
     def forward(self,x):
         out1=F.relu(self.bn2(self.conv2(F.relu(self.bn1(self.conv1(x))))))
         out1=out1+x
@@ -51,6 +52,7 @@ class featurenet(nn.Module):
         fin=planes[0]+planes[1]+planes[2]
         self.fconv=nn.Conv2d(fin, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
         self.fbn=nn.BatchNorm2d(128)
+        self.init_weights()
 
     def forward(self,x):
         N,C,H,W=x.shape
@@ -62,6 +64,21 @@ class featurenet(nn.Module):
         out2u=F.upsample(out2,size=(H,W),mode='bilinear',align_corners=True)
         out3u=F.upsample(out3,size=(H,W),mode='bilinear',align_corners=True)
         conFx=torch.cat((out1,out2u,out3u),dim=1)
-        out=self.fbn(self.fconv(conFx))
+        out= self.fbn(self.fconv(conFx))
         return out
+
+    def init_weights(self):
+        for layer in self.children():
+            if isinstance(layer, nn.Conv2d):
+                torch.nn.init.kaiming_normal_(layer.weight)
+            elif isinstance(layer, nn.BatchNorm2d):
+                layer.weight.data.fill_(1)
+                layer.bias.data.zero_()
+            elif isinstance(layer, Block):
+                for bl_layer in layer.children():
+                    if isinstance(bl_layer, nn.Conv2d):
+                        torch.nn.init.kaiming_normal_(bl_layer.weight)
+                    elif isinstance(bl_layer, nn.BatchNorm2d):
+                        bl_layer.weight.data.fill_(1)
+                        bl_layer.bias.data.zero_()
 
